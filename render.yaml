@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: manosamrakshak-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm run server
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: ALLOWED_ORIGINS
+        value: https://manosamrakshak-web.onrender.com
+      - key: PUBLIC_URL
+        value: https://manosamrakshak-api.onrender.com
+
+  - type: web
+    name: manosamrakshak-web
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: manosamrakshak-api
+          property: host
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

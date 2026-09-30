@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --page: 247 249 248;
+    --paper: 255 255 255;
+    --ink: 12 26 22;
+    --rule: 220 228 224;
+    color-scheme: light;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  body {
+    @apply bg-ivory-50 text-ink-900 font-sans antialiased;
+    font-feature-settings: 'cv05' 1, 'ss03' 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-normal;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Indic scripts need their own faces and a little more line height so no
+     glyph is clipped by a tight container. */
+  .lang-hi,
+  .lang-hi h1,
+  .lang-hi h2,
+  .lang-hi h3 {
+    font-family: 'Noto Sans Devanagari', 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  .lang-kn,
+  .lang-kn h1,
+  .lang-kn h2,
+  .lang-kn h3 {
+    font-family: 'Noto Sans Kannada', 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-teal-500 ring-offset-2 ring-offset-ivory-50;
+  }
+
+  ::selection {
+    @apply bg-sage-200 text-forest-900;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-sans text-eyebrow uppercase tracking-[0.18em] text-ink-400;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-paper shadow-card;
+  }
+
+  .card-quiet {
+    @apply rounded-2xl border border-line/70 bg-ivory-100/60;
+  }
+
+  .rule {
+    @apply h-px w-full bg-line;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium
+      transition-all duration-200 ease-editorial disabled:cursor-not-allowed disabled:opacity-45;
+  }
+
+  .btn-primary {
+    @apply btn bg-forest-700 text-ivory-50 hover:bg-forest-600 active:scale-[0.985];
+  }
+
+  .btn-secondary {
+    @apply btn border border-ink-900/15 bg-paper text-ink-900 hover:border-ink-900/35 hover:bg-ivory-100;
+  }
+
+  .btn-ghost {
+    @apply btn text-ink-500 hover:bg-ivory-200 hover:text-ink-900;
+  }
+
+  .btn-quiet-danger {
+    @apply btn border border-band-high/30 bg-band-high/5 text-band-high hover:bg-band-high/10;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-line bg-paper px-4 py-3 text-sm text-ink-900
+      placeholder:text-ink-300 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium tracking-wide;
+  }
+
+  .table-head {
+    @apply border-b border-line text-left text-[11px] uppercase tracking-[0.12em] text-ink-400;
+  }
+
+  /* Editorial rule used above section headings on the narrative pages. */
+  .hairline-top {
+    @apply border-t border-line pt-6;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden rounded-xl bg-ivory-200;
+  }
+
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 animate-sweep bg-gradient-to-r from-transparent via-white/70 to-transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grain {
+    background-image: radial-gradient(rgba(12, 26, 22, 0.035) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
