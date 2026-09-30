@@ -122,7 +122,7 @@ const server = createServer((req, res) => {
   });
 });
 
-server.listen(config.port, () => {
+server.listen(config.port, '0.0.0.0', () => {
   logLine(`listening on ${config.publicUrl}`);
   logLine(`sms provider: ${isSmsConfigured() ? config.sms.provider : 'not configured'}`);
   logLine(`telephony provider: ${isTelephonyConfigured() ? config.telephony.provider : 'not configured'}`);

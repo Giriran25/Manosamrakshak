@@ -2,7 +2,7 @@ services:
   - type: web
     name: manosamrakshak-api
     runtime: node
-    buildCommand: npm install
+    buildCommand: npm ci
     startCommand: npm run server
     healthCheckPath: /api/health
     envVars:
@@ -16,7 +16,7 @@ services:
   - type: web
     name: manosamrakshak-web
     runtime: static
-    buildCommand: npm install && npm run build
+    buildCommand: npm ci && npm run build
     staticPublishPath: ./dist
     envVars:
       - key: VITE_API_URL
